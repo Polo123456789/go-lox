@@ -9,7 +9,33 @@ import (
 	"github.com/Polo123456789/go-lox/pkg/lox"
 )
 
+func testASTPrinter() {
+	expr := lox.ExprBinary{
+		Left: &lox.ExprUnary{
+			Operator: lox.Token{Type: lox.MINUS, Lexeme: "-", Literal: nil, Line: 1},
+			Right:    &lox.ExprLiteral{Value: 123},
+		},
+		Operator: lox.Token{Type: lox.STAR, Lexeme: "*", Literal: nil, Line: 1},
+		Right: &lox.ExprBinary{
+			Left:     &lox.ExprLiteral{Value: 45.67},
+			Operator: lox.Token{Type: lox.PLUS, Lexeme: "+", Literal: nil, Line: 1},
+			Right: &lox.ExprGrouping{
+				Expr: &lox.ExprBinary{
+					Left:     &lox.ExprLiteral{Value: 1},
+					Operator: lox.Token{Type: lox.MINUS, Lexeme: "-", Literal: nil, Line: 1},
+					Right:    &lox.ExprLiteral{Value: 2},
+				},
+			},
+		},
+	}
+
+	fmt.Println(lox.PrintAST(&expr))
+}
+
 func main() {
+	testASTPrinter()
+	os.Exit(0)
+
 	interpreter := lox.NewLox()
 	reader := os.Stdin
 	replMode := true
