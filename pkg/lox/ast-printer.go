@@ -4,9 +4,9 @@ import (
 	"fmt"
 )
 
-func PrintAST(expr Expr) string {
+func PrintAST(expr Expr) {
 	printer := AstPrinter{}
-	return printer.Print(expr)
+	fmt.Println(printer.Print(expr))
 }
 
 type AstPrinter struct {

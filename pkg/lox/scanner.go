@@ -32,6 +32,8 @@ func (s *Scanner) ScanTokens() ([]Token, []Error) {
 		}
 	}
 
+	s.addToken(EOF, nil)
+
 	return s.tokens, s.errors
 }
 

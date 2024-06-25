@@ -1,9 +1,5 @@
 package lox
 
-import (
-	"fmt"
-)
-
 type Lox struct {
 }
 
@@ -17,8 +13,9 @@ func (l *Lox) Run(source string) []Error {
 	if len(errors) > 0 {
 		return errors
 	}
-	for _, token := range tokens {
-		fmt.Println(token)
-	}
+
+	parser := NewParser(tokens)
+	expr := parser.Parse()
+	PrintAST(expr)
 	return nil
 }
